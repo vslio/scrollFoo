@@ -1,0 +1,45 @@
+/* Plugin styles ~ ScrollFoo *************************/
+
+// Wrapping both the scroller and the content
+.scrollfoo__content-wrapper {
+    position: relative;
+}
+
+// Class applied to the body
+.scrollfoo--dragging {
+    .scrollfoo__content-wrapper {
+        @include user-select(none);
+    }
+    .scrollfoo__scroller {
+        @extend %active-scroller;
+    }
+}
+
+.scrollfoo__parent {
+    overflow: hidden;
+}
+
+%active-scroller {
+    width: 8px;
+    background-color: lighten(#aaa, 10%);
+}
+
+// This is our custom scroll(bar)er
+.scrollfoo__scroller {
+    display: inline-block;
+    position: absolute;
+    right: -5px;
+    width: 4px;
+    background-color: #aaa;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 9;
+    @include transition(background-color 0.2s $slick-ease, width 0.2s $slick-ease 0.2s);
+    &:hover {
+        @extend %active-scroller;
+        @include transition-delay(0s);
+    }
+    &--disabled {
+        background-color: transparent !important;
+    }
+}
